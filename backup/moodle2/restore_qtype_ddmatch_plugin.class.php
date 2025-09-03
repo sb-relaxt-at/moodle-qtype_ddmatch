@@ -89,7 +89,7 @@ class restore_qtype_ddmatch_plugin extends restore_qtype_plugin {
     public static function convert_backup_to_questiondata(array $backupdata): \stdClass {
         $questiondata = parent::convert_backup_to_questiondata($backupdata);
 
-        $questiondata->options = (object) $backupdata["plugin_qtype_ddmatch_question"]['matchoptions'][0];
+        $questiondata->options = (object) ($backupdata["plugin_qtype_ddmatch_question"]['matchoptions'][0] ?? []);
         $questiondata->options->subquestions = array_map(
             fn($match) => (object) $match,
             $backupdata["plugin_qtype_ddmatch_question"]['matches']['match'] ?? [],
